@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>한장의 추억</title>
+    <link rel="stylesheet" href="/static/css/fonts.css?v=20260913-2">
+    <link rel="stylesheet" href="/static/css/style.css?v=20260913-3">
+</head>
+<body>
+    <main class="viewport" id="app">
+        <section
+            class="stage main-screen"
+            id="mainScreen"
+            aria-label="메인 화면">
+            <img
+                class="ambient-media"
+                src="/static/assets/images/main.png?v=20260913-2"
+                alt=""
+                aria-hidden="true">
+            <img
+                class="screen-media"
+                src="/static/assets/images/main.png?v=20260913-2"
+                decoding="sync"
+                fetchpriority="high"
+                alt="한장의 추억 메인 화면">
+            <input
+                class="name-input"
+                id="nameInput"
+                type="text"
+                placeholder="이름을 입력하세요"
+                autocomplete="off"
+                maxlength="100"
+                aria-describedby="searchMessage">
+            <button
+                class="search-button"
+                id="searchButton"
+                type="button"
+                aria-label="입력한 이름으로 추억 검색"></button>
+            <p
+                class="search-message"
+                id="searchMessage"
+                role="status"
+                aria-live="polite"></p>
+            <button
+                class="login-button"
+                id="loginButton"
+                type="button"
+                aria-label="로그인 화면 열기"></button>
+        </section>
+
+        <section
+            class="stage login-view"
+            id="loginView"
+            aria-label="로그인 화면"
+            hidden>
+            <img
+                class="ambient-media"
+                src="/static/assets/images/login.png?v=20260913-2"
+                alt=""
+                aria-hidden="true">
+            <img
+                class="screen-media"
+                src="/static/assets/images/login.png?v=20260913-2"
+                decoding="sync"
+                fetchpriority="high"
+                alt="로그인 화면">
+
+            <form class="login-form" id="loginForm">
+                <h1 class="sr-only" id="authFormTitle">로그인</h1>
+                <input
+                    class="login-id"
+                    id="loginId"
+                    type="text"
+                    placeholder="아이디"
+                    autocomplete="username"
+                    maxlength="50"
+                    required>
+                <input
+                    class="login-password"
+                    id="loginPassword"
+                    type="password"
+                    placeholder="비밀번호"
+                    autocomplete="current-password"
+                    maxlength="128"
+                    required>
+                <input
+                    class="login-nickname"
+                    id="registerNickname"
+                    type="text"
+                    placeholder="닉네임"
+                    autocomplete="nickname"
+                    maxlength="50"
+                    hidden>
+                <button
+                    class="login-submit"
+                    id="loginSubmit"
+                    type="submit">로그인 →</button>
+                <button
+                    class="auth-mode-button"
+                    id="authModeButton"
+                    type="button">처음이신가요? 회원가입</button>
+                <button
+                    class="logout-button"
+                    id="logoutButton"
+                    type="button"
+                    hidden>로그아웃</button>
+                <p
+                    class="login-message"
+                    id="loginMessage"
+                    role="status"
+                    aria-live="polite"></p>
+            </form>
+
+            <button
+                class="back-button"
+                id="loginBack"
+                type="button"
+                aria-label="메인 화면으로 돌아가기">‹</button>
+        </section>
+
+        <section
+            class="stage memory-view"
+            id="memoryView"
+            aria-label="추억 화면"
+            hidden>
+            <img
+                class="ambient-media"
+                src="/static/assets/images/memory-poster.jpg?v=20260913-2"
+                alt=""
+                aria-hidden="true">
+            <video
+                class="screen-media"
+                id="memoryVideo"
+                src="/static/assets/videos/memory.mp4?v=20260913-2"
+                poster="/static/assets/images/memory-poster.jpg?v=20260913-2"
+                muted
+                loop
+                playsinline
+                preload="metadata"></video>
+
+            <div class="memory-notes" id="memoryNotes">
+                <article class="memory-text note1"><div class="memory-body"></div></article>
+                <article class="memory-text note2"><div class="memory-body"></div></article>
+                <article class="memory-text note3"><div class="memory-body"></div></article>
+                <article class="memory-text note4"><div class="memory-body"></div></article>
+                <article class="memory-text note5"><div class="memory-body"></div></article>
+                <article class="memory-text note6"><div class="memory-body"></div></article>
+                <article class="memory-text note7"><div class="memory-body"></div></article>
+                <article class="memory-text note8"><div class="memory-body"></div></article>
+            </div>
+
+            <nav class="page-nav" aria-label="추억 페이지 이동">
+                <button id="prevPage" type="button" aria-label="이전 페이지">‹</button>
+                <span id="pageIndicator" aria-live="polite">1 / 10</span>
+                <button id="nextPage" type="button" aria-label="다음 페이지">›</button>
+            </nav>
+        </section>
+    </main>
+
+    <script type="module" src="/static/js/main.js?v=20260913-3"></script>
+</body>
+</html>

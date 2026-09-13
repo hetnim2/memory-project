@@ -1,0 +1,435 @@
+/* 메인·로그인·추억 화면의 공통 16:9 UI 배치입니다. */
+
+:root {
+    --ink: #263956;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    background: #07152d;
+    font-family: 'Gaegu', cursive;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+input,
+button {
+    font: inherit;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* 가로 화면에서는 원본 좌표 전체를 브라우저 크기에 맞춰 빈틈없이 표시합니다. */
+
+.viewport {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding:
+        env(safe-area-inset-top, 0px)
+        env(safe-area-inset-right, 0px)
+        env(safe-area-inset-bottom, 0px)
+        env(safe-area-inset-left, 0px);
+    overflow: hidden;
+    background: #07152d;
+}
+
+.stage {
+    position: relative;
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    aspect-ratio: auto;
+    overflow: hidden;
+    container-type: size;
+    isolation: isolate;
+}
+
+.ambient-media {
+    position: fixed;
+    inset: -4vmax;
+    display: none;
+    width: calc(100vw + 8vmax);
+    height: calc(100dvh + 8vmax);
+    object-fit: cover;
+    filter: blur(clamp(14px, 2vw, 36px)) brightness(0.66) saturate(0.86);
+    pointer-events: none;
+    user-select: none;
+    z-index: -2;
+}
+
+.screen-media {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    image-rendering: auto;
+    z-index: 0;
+}
+
+
+/* 메인 화면: 이름 검색과 발바닥 로그인 영역 */
+
+.name-input {
+    position: absolute;
+    left: 41%;
+    top: 56%;
+    width: 22.5%;
+    height: 6%;
+    padding: 0 1.2cqw;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: clamp(8px, 1.8cqw, 58px);
+    z-index: 2;
+}
+
+.search-button {
+    position: absolute;
+    left: 61.8%;
+    top: 55.5%;
+    width: 4.8%;
+    height: 6.4%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.name-input::placeholder {
+    color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+
+.search-message {
+    position: absolute;
+    left: 41%;
+    top: 62%;
+    width: 22.5%;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(6px, 0.85cqw, 28px);
+    text-align: center;
+    z-index: 2;
+}
+
+.login-button {
+    position: absolute;
+    left: 4.5%;
+    top: 86%;
+    width: 8%;
+    height: 12%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    z-index: 3;
+}
+
+
+/* 로그인과 회원가입 화면 */
+
+.login-form {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.login-id,
+.login-password,
+.login-nickname,
+.login-submit,
+.auth-mode-button,
+.logout-button {
+    position: absolute;
+    left: 40.8%;
+    width: 27%;
+}
+
+.login-id,
+.login-password,
+.login-nickname {
+    height: 8%;
+    padding: 0 1.2cqw 0 4.2cqw;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #fff;
+    font-size: clamp(8px, 1.8cqw, 58px);
+    line-height: 1;
+}
+
+.login-id {
+    top: 35.7%;
+}
+
+.login-password {
+    top: 46%;
+}
+
+.login-nickname {
+    top: 52%;
+}
+
+.login-submit,
+.logout-button {
+    top: 57.5%;
+    height: 8%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: white;
+    font-size: clamp(7px, 1.5cqw, 32px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-mode-button {
+    top: 67%;
+    height: 5%;
+    border: 0;
+    background: rgba(7, 21, 45, 0.45);
+    border-radius: 999px;
+    color: #fff;
+    cursor: pointer;
+    font-size: clamp(6px, 0.9cqw, 26px);
+}
+
+.login-message {
+    position: absolute;
+    left: 40.8%;
+    top: 73%;
+    width: 27%;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(6px, 0.9cqw, 26px);
+    text-align: center;
+    z-index: 4;
+}
+
+/* 회원가입일 때 닉네임 입력칸이 들어갈 공간을 만듭니다. */
+.register-mode .login-id {
+    top: 30%;
+}
+
+.register-mode .login-password {
+    top: 40%;
+}
+
+.register-mode .login-nickname {
+    top: 50%;
+}
+
+.register-mode .login-submit {
+    top: 60%;
+}
+
+.register-mode .auth-mode-button {
+    top: 69%;
+}
+
+.register-mode .login-message {
+    top: 75%;
+}
+
+.back-button {
+    position: absolute;
+    left: 1.5%;
+    top: 2%;
+    width: 6%;
+    height: 9%;
+    padding: 0;
+    border: 0;
+    background: rgba(7, 21, 45, 0.25);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    font-size: clamp(12px, 3cqw, 90px);
+    line-height: 1;
+    z-index: 30;
+}
+
+
+/* 추억 화면: 메모지 8개와 10페이지 이동 */
+
+.memory-notes {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.memory-text {
+    position: absolute;
+    overflow: hidden;
+    color: #2f3440;
+    font-family: 'Gaegu', cursive;
+}
+
+.memory-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: keep-all;
+    line-height: 1.42;
+    font-size: 1.2cqw;
+    z-index: 2;
+}
+
+/* 배경 속 메모지의 실제 안쪽 여백과 각도에 맞춘 글 영역 */
+.note1 {
+    left: 17%; top: 11.5%; width: 23%; height: 20%;
+    transform: rotate(-7deg); padding: 1.1% 1.2%;
+}
+.note2 {
+    left: 48.5%; top: 11.5%; width: 16%; height: 22%;
+    transform: rotate(5deg); padding: 1% 0.8%;
+}
+.note3 {
+    left: 80%; top: 13%; width: 13%; height: 22%;
+    transform: rotate(-6.5deg); padding: 1% 0.7%;
+}
+.note4 {
+    left: 35.5%; top: 46%; width: 13%; height: 20%;
+    transform: rotate(1deg); padding: 0.9% 0.7%;
+}
+.note5 {
+    left: 52.5%; top: 50%; width: 13%; height: 20%;
+    padding: 0.9% 0.7%;
+}
+.note6 {
+    left: 72.5%; top: 47.5%; width: 17%; height: 20%;
+    padding: 0.9% 0.9%;
+}
+.note7 {
+    left: 4%; top: 79%; width: 20%; height: 15%;
+    transform: rotate(2deg); padding: 0.7% 1%;
+}
+.note8 {
+    left: 53%; top: 81%; width: 20%; height: 17%;
+    transform: rotate(-1deg); padding: 1% 1.2%;
+}
+
+.page-nav {
+    position: absolute;
+    right: 0.5%;
+    bottom: 11%;
+    display: flex;
+    align-items: center;
+    gap: 0.6cqw;
+    padding: 0.3cqw 0.6cqw;
+    border: 1px solid rgba(190, 187, 176, 0.9);
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: #f2f1f6;
+    font-size: clamp(6px, 1.05cqw, 36px);
+    font-weight: 700;
+    z-index: 20;
+}
+
+.page-nav button {
+    display: grid;
+    place-items: center;
+    width: clamp(12px, 2.2cqw, 70px);
+    aspect-ratio: 1;
+    padding: 0;
+    border: 1px solid rgba(255, 240, 210, 0.85);
+    border-radius: 50%;
+    background: #65371f;
+    color: #fff8e8;
+    cursor: pointer;
+    font-size: clamp(9px, 1.8cqw, 54px);
+    line-height: 1;
+}
+
+.page-nav button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.memory-signature {
+    position: absolute;
+    right: 7%;
+    bottom: 7%;
+    width: clamp(18px, 4.3cqw, 82px);
+    height: clamp(8px, 2cqw, 35px);
+    object-fit: contain;
+    object-position: right bottom;
+    opacity: 0.55;
+    filter: grayscale(1);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+}
+
+#memoryView {
+    overflow: hidden;
+}
+
+#memoryVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+@media (orientation: portrait) {
+    .viewport {
+        place-items: start center;
+        padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    .stage {
+        width: 100vw;
+        height: 56.25vw;
+        margin-top: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .ambient-media {
+        height: calc(100vh + 8vmax);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .memory-view video {
+        display: none;
+    }
+
+    .memory-view {
+        background: #07152d;
+    }
+}

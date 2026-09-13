@@ -1,0 +1,33 @@
+# 비밀번호, 세션 키와 인증서
+.env
+*.pem
+*.key
+*.crt
+certificates/
+
+# Python 가상환경과 캐시
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# 편집기, 운영체제와 로그
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# 빌드 결과
+dist/
+build/
+
+.env
+.venv/
+__pycache__/
+*.pyc

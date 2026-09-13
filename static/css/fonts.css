@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Gaegu';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/static/assets/fonts/Gaegu-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Gaegu';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/static/assets/fonts/Gaegu-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Hi Melody';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/static/assets/fonts/HiMelody-Regular.woff2') format('woff2');
+}
