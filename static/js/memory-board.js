@@ -49,16 +49,26 @@ function createPages(memories) {
 function fitTextToNote(textElement) {
     const note = textElement.parentElement;
     const stageWidth = memoryView.getBoundingClientRect().width;
-    const minimumSize = stageWidth * 0.0068;
-    let fontSize = stageWidth * 0.012;
+
+    // 기본 글자 크기: 너무 크거나 작아지지 않게 제한
+    let fontSize = Math.max(16, Math.min(20, stageWidth * 0.012));
+
+    // 아무리 긴 글이라도 13px보다 작아지지 않음
+    const minimumSize = 13;
 
     textElement.style.fontSize = `${fontSize}px`;
+
     while (
-        (textElement.scrollHeight > note.clientHeight
-            || textElement.scrollWidth > note.clientWidth)
-        && fontSize > minimumSize
+        (textElement.scrollHeight > note.clientHeight ||
+         textElement.scrollWidth > note.clientWidth) &&
+        fontSize > minimumSize
     ) {
         fontSize -= 0.5;
+
+        if (fontSize < minimumSize) {
+            fontSize = minimumSize;
+        }
+
         textElement.style.fontSize = `${fontSize}px`;
     }
 }
