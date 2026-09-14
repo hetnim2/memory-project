@@ -320,10 +320,16 @@ button {
     transform: rotate(-7deg); padding: 1.1% 1.2%;
 }
 .note2 {
-    left: 48.5%; top: 11.5%; width: 16%; height: 22%;
+    left: 48.5%;
+    top: 11.5%;
+    width: 16%;
+    height: 22%;
+    transform: rotate(3deg);
+    padding: 1% 0.8%;
+
 }
 .note3 {
-    left: 77%;
+    left: 79.5%;
     top: 13%;
     width: 13%;
     height: 22%;
