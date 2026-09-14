@@ -98,3 +98,83 @@ const initialScreen = location.hash === '#login'
         ? 'memory'
         : 'main';
 showScreen(initialScreen, false);
+
+// ===============================
+// 이스터에그 10컷 스토리
+// ===============================
+
+const easterEggTrigger = document.getElementById("easterEggTrigger");
+const easterEggViewer = document.getElementById("easterEggViewer");
+const easterEggImage = document.getElementById("easterEggImage");
+const easterEggNext = document.getElementById("easterEggNext");
+
+const easterEggImages = [
+    "/static/assets/images/easteregg/1.png",
+    "/static/assets/images/easteregg/2.png",
+    "/static/assets/images/easteregg/3.png",
+    "/static/assets/images/easteregg/4.png",
+    "/static/assets/images/easteregg/5.png",
+    "/static/assets/images/easteregg/6.png",
+    "/static/assets/images/easteregg/7.png",
+    "/static/assets/images/easteregg/8.png",
+    "/static/assets/images/easteregg/9.png",
+    "/static/assets/images/easteregg/10.png"
+];
+
+let easterEggIndex = 0;
+let easterEggTimer = null;
+
+function lockEasterEggNext() {
+    clearTimeout(easterEggTimer);
+
+    easterEggNext.disabled = true;
+    easterEggNext.classList.remove("is-ready");
+
+    // 10번째 사진에서는 다음 버튼 없음
+    if (easterEggIndex === easterEggImages.length - 1) {
+        return;
+    }
+
+    // 4초 후 화살표 활성화
+    easterEggTimer = setTimeout(() => {
+        easterEggNext.disabled = false;
+        easterEggNext.classList.add("is-ready");
+    }, 4000);
+}
+
+function showEasterEggImage(index) {
+    easterEggIndex = index;
+
+    // 사진 전환만 부드럽게
+    easterEggImage.classList.add("is-changing");
+
+    setTimeout(() => {
+        easterEggImage.src = easterEggImages[easterEggIndex];
+
+        easterEggImage.onload = () => {
+            easterEggImage.classList.remove("is-changing");
+        };
+
+        lockEasterEggNext();
+    }, 250);
+}
+
+// 메인화면 왼쪽 아래 액자 클릭
+easterEggTrigger.addEventListener("click", () => {
+    easterEggIndex = 0;
+
+    easterEggViewer.classList.add("is-open");
+    easterEggViewer.setAttribute("aria-hidden", "false");
+
+    showEasterEggImage(0);
+});
+
+// 다음 화살표 클릭
+easterEggNext.addEventListener("click", () => {
+    if (easterEggNext.disabled) return;
+
+    if (easterEggIndex < easterEggImages.length - 1) {
+        showEasterEggImage(easterEggIndex + 1);
+    }
+});
+

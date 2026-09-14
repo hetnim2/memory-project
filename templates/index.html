@@ -26,6 +26,13 @@
                 decoding="sync"
                 fetchpriority="high"
                 alt="한장의 추억 메인 화면">
+<button
+    id="easterEggTrigger"
+    class="easteregg-trigger"
+    type="button"
+    aria-label="이스터에그 이야기 열기">
+</button>
+              
             <input
                 class="name-input"
                 id="nameInput"
@@ -159,7 +166,22 @@
             </nav>
         </section>
     </main>
+<div id="easterEggViewer" class="easteregg-viewer" aria-hidden="true">
+    <img
+        id="easterEggImage"
+        class="easteregg-image"
+        src=""
+        alt="이스터에그 이야기">
 
+    <button
+        id="easterEggNext"
+        class="easteregg-next"
+        type="button"
+        disabled
+        aria-label="다음">
+        →
+    </button>
+</div>
     <script type="module" src="/static/js/main.js?v=20260913-3"></script>
 </body>
 </html>
