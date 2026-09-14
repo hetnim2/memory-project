@@ -59,10 +59,10 @@ function fitTextToNote(textElement) {
     textElement.style.fontSize = `${fontSize}px`;
 
     while (
-        (textElement.scrollHeight > note.clientHeight ||
-         textElement.scrollWidth > note.clientWidth) &&
-        fontSize > minimumSize
-    ) {
+    (textElement.scrollHeight > textElement.clientHeight ||
+     textElement.scrollWidth > textElement.clientWidth) &&
+    fontSize > minimumSize
+) {
         fontSize -= 0.5;
 
         if (fontSize < minimumSize) {
