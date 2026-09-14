@@ -117,8 +117,8 @@ const easterEggImages = [
     "/static/assets/images/easteregg/6.png",
     "/static/assets/images/easteregg/7.png",
     "/static/assets/images/easteregg/8.png",
-    "/static/assets/images/easteregg/9.png",
-    "/static/assets/images/easteregg/10.png"
+    "/static/assets/images/easteregg/9.png"
+  
 ];
 
 let easterEggIndex = 0;
