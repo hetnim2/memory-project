@@ -27,6 +27,7 @@ def get_memories(
     try:
         memories = find_memories_by_name(target_name)
     except (MySQLError, DatabaseConfigurationError, ValueError) as exc:
+        print(f"[DB ERROR] {type(exc).__name__}: {exc}", flush=True)
         raise HTTPException(
             status_code=503,
             detail="추억 조회 중 데이터베이스 연결을 확인해 주세요.",
