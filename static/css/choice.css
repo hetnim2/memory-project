@@ -26,6 +26,7 @@ body {
  */
 .choice-stage {
     position: absolute;
+  
     top: 50%;
     left: 50%;
     width: max(100vw, 177.7778dvh);
@@ -121,22 +122,15 @@ body {
     border: 0;
 }
 
-/* 세로형 휴대폰·태블릿에서는 유튜브처럼 16:9 화면을 위쪽에 유지합니다. */
-@media (orientation: portrait) {
-    .choice-page {
-        position: relative;
-        min-height: 100dvh;
-        background: #27180f;
-    }
+/* 태블릿 전용 */
+@media (min-width: 768px) and (max-width: 1366px) and (pointer: coarse)  {
 
-    .choice-stage {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 56.25vw;
-        transform: none;
-    }
+}
+
+/* 휴대폰 전용 - 세로/가로 회전 모두 같은 모바일 화면 사용 */
+@media (max-width: 767px),
+       (max-height: 500px) and (pointer: coarse) {
+
 }
 
 @media (prefers-reduced-motion: reduce) {
