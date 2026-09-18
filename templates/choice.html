@@ -54,6 +54,52 @@
                 <span class="sr-only">추억 기록하러 가기</span>
             </button>
         </div>
+            <!-- 모바일 전용 선택 화면 시작 -->
+    <div class="choice-mobile-stage">
+
+        <video
+            class="choice-mobile-video choice-mobile-video-search"
+            id="mobileSearchPreview"
+            src="/static/assets/choice/mobile-search.mp4?v=20260918-2"
+            muted
+            autoplay
+            loop
+            playsinline
+            preload="auto">
+        </video>
+
+        <video
+            class="choice-mobile-video choice-mobile-video-write"
+            id="mobileWritePreview"
+            src="/static/assets/choice/mobile-write.mp4?v=20260918-2"
+            muted
+            autoplay
+            loop
+            playsinline
+            preload="auto">
+        </video>
+
+        <img
+            class="choice-mobile-foreground"
+            src="/static/assets/choice/choice-foreground-mobile.png?v=20260918-2"
+            alt="한장의 추억 모바일 선택 화면">
+
+        <button
+            class="choice-mobile-hit choice-mobile-hit-search"
+            type="button"
+            data-choice="search">
+            <span class="sr-only">추억 검색하러 가기</span>
+        </button>
+
+        <button
+            class="choice-mobile-hit choice-mobile-hit-write"
+            type="button"
+            data-choice="write">
+            <span class="sr-only">추억 기록하러 가기</span>
+        </button>
+
+    </div>
+    <!-- 모바일 전용 선택 화면 끝 -->
     </main>
 
     <script type="module" src="/static/js/choice.js?v=20260918-1"></script>

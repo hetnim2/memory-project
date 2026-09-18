@@ -121,7 +121,9 @@ body {
     white-space: nowrap;
     border: 0;
 }
-
+.choice-mobile-stage {
+    display: none;
+}
 /* 태블릿 전용 */
 @media (min-width: 768px) and (max-width: 1366px) and (pointer: coarse)  {
 
@@ -131,13 +133,58 @@ body {
 @media (max-width: 767px),
        (max-height: 500px) and (pointer: coarse) {
 
+    .choice-stage {
+        display: none;
+    }
+
+    .choice-mobile-stage {
+        display: block;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden;
+        background: #27180f;
+    }
+
+    /* 위쪽 50% : 모바일 영상 + 앞쪽 그림 */
+    .choice-mobile-video,
+    .choice-mobile-foreground {
+        position: absolute;
+        top: 0;
+    }
+
+    .choice-mobile-video {
+        width: 50%;
+        height: 50dvh;
+        object-fit: cover;
+        z-index: 1;
+        opacity: 1;
+        pointer-events: none;
+    }
+
+    .choice-mobile-video-search {
+        left: 0;
+    }
+
+    .choice-mobile-video-write {
+        left: 50%;
+    }
+
+    .choice-mobile-foreground {
+        left: 0;
+        width: 100%;
+        height: 50dvh;
+        object-fit: contain;
+        z-index: 2;
+        pointer-events: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .choice-video {
+    .choice-video,
+    .choice-mobile-video {
         transition: none;
     }
-
 }
-
 
