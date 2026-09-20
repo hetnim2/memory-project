@@ -146,39 +146,56 @@ body {
         overflow: hidden;
         background: #27180f;
     }
+.choice-mobile-hit {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50dvh;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    z-index: 3;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
 
-    /* 위쪽 50% : 모바일 영상 + 앞쪽 그림 */
-    .choice-mobile-video,
-    .choice-mobile-foreground {
-        position: absolute;
-        top: 0;
-    }
+.choice-mobile-hit-search {
+    top: 0;
+}
 
-    .choice-mobile-video {
-        width: 50%;
-        height: 50dvh;
-        object-fit: cover;
-        z-index: 1;
-        opacity: 1;
-        pointer-events: none;
-    }
+.choice-mobile-hit-write {
+    top: 50dvh;
+}
+    /* 모바일 전용 : 위쪽 검색 / 아래쪽 기록 */
 
-    .choice-mobile-video-search {
-        left: 0;
-    }
+.choice-mobile-video {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50dvh;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 1;
+    pointer-events: none;
+}
 
-    .choice-mobile-video-write {
-        left: 50%;
-    }
+.choice-mobile-video-search {
+    top: 0;
+}
 
-    .choice-mobile-foreground {
-        left: 0;
-        width: 100%;
-        height: 50dvh;
-        object-fit: contain;
-        z-index: 2;
-        pointer-events: none;
-    }
+.choice-mobile-video-write {
+    top: 50dvh;
+}
+
+.choice-mobile-foreground {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {

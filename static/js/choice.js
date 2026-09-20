@@ -3,7 +3,8 @@
 const page = document.getElementById('choicePage');
 const searchPreview = document.getElementById('searchPreview');
 const writePreview = document.getElementById('writePreview');
-const cards = [...document.querySelectorAll('[data-choice]')];
+const cards = [...document.querySelectorAll('.choice-stage [data-choice]')];
+const mobileCards = [...document.querySelectorAll('.choice-mobile-stage [data-choice]')];
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -81,10 +82,18 @@ page.addEventListener('pointermove', (event) => {
     activatePreview(event.clientX < stage.left + stage.width / 2 ? 'search' : 'write');
 });
 
+
 cards.forEach((card) => {
     const choice = card.dataset.choice;
     card.addEventListener('focus', () => activatePreview(choice));
     card.addEventListener('click', () => choose(choice));
+});
+mobileCards.forEach((card) => {
+    const choice = card.dataset.choice;
+
+    card.addEventListener('click', () => {
+        window.location.assign(destinations[choice]);
+    });
 });
 
 document.addEventListener('visibilitychange', () => {
