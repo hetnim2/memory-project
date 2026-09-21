@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>한장의 추억 | 시작</title>
     <link rel="stylesheet" href="/static/css/choice.css?v=20260918-1">
+    <link rel="preload" as="image" href="/static/assets/choice/choice-foreground-mobile.png?v=20260918-2" media="(max-width: 767px), (max-height: 500px) and (pointer: coarse)">
 </head>
 <body>
     <main class="choice-page" id="choicePage">
@@ -60,7 +61,8 @@
         <video
             class="choice-mobile-video choice-mobile-video-search"
             id="mobileSearchPreview"
-            data-src="/static/assets/choice/mobile-search.mp4?v=20260918-2"
+            data-src="/static/assets/choice/mobile-search.mp4?v=20260921-loop1"
+            poster="/static/assets/choice/poster-search.jpg?v=20260921-loop1"
             muted
             autoplay
             loop
@@ -71,8 +73,9 @@
         <video
             class="choice-mobile-video choice-mobile-video-write"
             id="mobileWritePreview"
-            data-src="/static/assets/choice/mobile-write.mp4?v=20260918-2"
+            data-src="/static/assets/choice/mobile-write.mp4?v=20260921-loop2"
             muted
+            poster="/static/assets/choice/poster-write.jpg?v=20260921-loop1"
             autoplay
             loop
             playsinline

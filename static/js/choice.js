@@ -7,6 +7,29 @@ const cards = [...document.querySelectorAll('.choice-stage [data-choice]')];
 const mobileCards = [...document.querySelectorAll('.choice-mobile-stage [data-choice]')];
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const mobileMode = window.matchMedia(
+    '(max-width: 767px), (max-height: 500px) and (pointer: coarse)'
+).matches;
+
+function loadChoiceAssets() {
+    const selector = mobileMode
+        ? '.choice-mobile-stage [data-src]'
+        : '.choice-stage [data-src]';
+
+    document.querySelectorAll(selector).forEach((element) => {
+        element.src = element.dataset.src;
+
+        if (element.tagName === 'VIDEO') {
+            element.load();
+
+            if (element.autoplay) {
+                element.play().catch(() => {});
+            }
+        }
+    });
+}
+
+loadChoiceAssets();
 
 const destinations = {
     search: '/search',
