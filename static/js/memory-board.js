@@ -1,7 +1,7 @@
 /** 추억 8개씩 10페이지 표시하고 글자 크기를 맞추는 화면 로직입니다. */
 
 const NOTES_PER_PAGE = 8;
-const MAX_PAGES = 10;
+const MAX_PAGES = 50;
 const WIKIMEDIA_BASE = 'https://upload.wikimedia.org/wikipedia/commons/';
 
 const SIGNATURES = [
@@ -20,6 +20,7 @@ const SIGNATURES = [
 const shuffledSignatures = [...SIGNATURES].sort(() => Math.random() - 0.5);
 const memoryView = document.getElementById('memoryView');
 const noteBodies = [...document.querySelectorAll('.memory-body')];
+const mobileNoteBodies = [...document.querySelectorAll('.mobile-memory-body')];
 const pageIndicator = document.getElementById('pageIndicator');
 const previousButton = document.getElementById('prevPage');
 const nextButton = document.getElementById('nextPage');
@@ -72,7 +73,26 @@ function fitTextToNote(textElement) {
         textElement.style.fontSize = `${fontSize}px`;
     }
 }
+function fitTextToMobileNote(textElement) {
+  let fontSize = 8;
+  const minimumSize = 6;
 
+  textElement.style.fontSize = `${fontSize}px`;
+  textElement.style.textAlign = 'left';
+  textElement.style.whiteSpace = 'pre-wrap';
+  textElement.style.wordBreak = 'keep-all';
+  textElement.style.overflowWrap = 'break-word';
+  textElement.style.lineHeight = '';
+
+  while (
+    (textElement.scrollHeight > textElement.clientHeight ||
+      textElement.scrollWidth > textElement.clientWidth) &&
+    fontSize > minimumSize
+  ) {
+    fontSize -= 0.25;
+    textElement.style.fontSize = `${fontSize}px`;
+  }
+}
 
 /** 짧은 메모의 오른쪽 아래에 장식용 서명을 추가합니다. */
 function addSignature(noteBody, text, noteIndex) {
@@ -99,16 +119,27 @@ function addSignature(noteBody, text, noteIndex) {
 export function renderMemoryPage() {
     const currentPage = pages[currentPageIndex];
 
+    // PC 메모지
     noteBodies.forEach((noteBody, index) => {
         const text = currentPage[index] ?? '';
         noteBody.textContent = text;
         addSignature(noteBody, text, index);
     });
 
+    // 모바일 메모지
+    mobileNoteBodies.forEach((noteBody, index) => {
+        const text = currentPage[index] ?? '';
+        noteBody.textContent = text;
+    });
+
     pageIndicator.textContent = `${currentPageIndex + 1} / ${pages.length}`;
     previousButton.disabled = currentPageIndex === 0;
     nextButton.disabled = currentPageIndex === pages.length - 1;
-    requestAnimationFrame(() => noteBodies.forEach(fitTextToNote));
+
+    requestAnimationFrame(() => {
+        noteBodies.forEach(fitTextToNote);
+        mobileNoteBodies.forEach(fitTextToMobileNote);
+    });
 }
 
 

@@ -566,3 +566,378 @@ button {
     pointer-events: auto;
     cursor: pointer;
 }
+/* 모바일 전용 메인 화면 */
+.mobile-main-screen {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    #mainScreen {
+        display: none;
+    }
+
+    .mobile-main-screen {
+        display: block;
+        position: relative;
+        width: 100%;
+        min-height: 100dvh;
+        overflow: hidden;
+        background: #000;
+    }
+
+    .mobile-main-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    /* 위치 잡기 전까지 기능 요소는 잠시 숨김 */
+    
+.mobile-name-input {
+    display: block;
+    position: absolute;
+
+    left: 25%;
+    top: 24%;
+    width: 48%;
+    height: 6%;
+
+    padding: 0 2%;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #555;
+    font-size: clamp(16px, 4vw, 22px);
+
+    z-index: 60;
+}
+
+.mobile-search-button {
+    display: block;
+    position: absolute;
+
+    left: 15%;
+    top: 24%;
+    width: 10%;
+    height: 6%;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    z-index: 61;
+}
+
+.mobile-easteregg-trigger {
+    display: block;
+    position: absolute;
+    left: 8%;
+    top: 44%;
+    width: 22%;
+    height: 15%;
+    border: none;
+    background: transparent;
+    z-index: 50;
+}
+
+.mobile-quote {
+    position: absolute;
+    z-index: 3;
+    left: 9%;
+    right: 9%;
+    top: 72%;
+    height: 23%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    color: #3b281d;
+    pointer-events: none;
+}
+
+.mobile-quote-context {
+    margin: 0 0 4% 0;
+    text-align: center;
+    font-size: clamp(11px, 3vw, 15px);
+    line-height: 1.5;
+    white-space: pre-line;
+}
+
+.mobile-quote-text {
+    margin: 0;
+    font-size: clamp(18px, 5vw, 27px);
+    font-weight: 700;
+    line-height: 1.45;
+    white-space: pre-line;
+}
+
+.mobile-quote-author {
+    margin: 5% 4% 0 0;
+    text-align: right;
+    font-size: clamp(14px, 4vw, 20px);
+}
+}
+/* =========================
+   모바일 이스터에그 전용
+========================= */
+
+.mobile-easteregg-viewer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 9999;
+
+    grid-template-rows: 15vh 70vh 15vh;
+    grid-template-columns: 1fr;
+}
+
+.mobile-easteregg-viewer.active {
+    display: grid;
+}
+
+.mobile-easteregg-image {
+    grid-row: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+
+    opacity: 1;
+    transition: opacity 0.45s ease;
+}
+
+.mobile-easteregg-image.is-changing {
+    opacity: 0;
+}
+
+.mobile-easteregg-next {
+    grid-row: 3;
+    align-self: end;
+    justify-self: end;
+
+    margin-right: 4vw;
+    margin-bottom: 3vh;
+
+    min-width: 36px;
+    height: 36px;
+
+    padding: 0 8px;
+
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.mobile-easteregg-next:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+.go-home-text {
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 24px;
+    line-height: 1;
+}
+
+.go-home-arrow {
+    font-family: sans-serif;
+    font-size: 22px;
+    line-height: 1;
+}
+/* 모바일 전용 메모리 화면 */
+.mobile-memory-view {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 9000;
+}
+
+.mobile-memory-view.active {
+    display: block;
+}
+
+.mobile-memory-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* 모바일 전용 메모리 화면 */
+.mobile-memory-view {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 9000;
+    overflow: hidden;
+}
+
+.mobile-memory-view.active {
+    display: block;
+}
+
+.mobile-memory-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 메모지 오버레이 */
+.mobile-memory-notes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.mobile-memory-note {
+    position: absolute;
+    overflow: hidden;
+    transform-origin: center center;
+}
+
+.mobile-memory-body {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    color: #5b4330;
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 15px;
+    line-height: 1.28;
+    letter-spacing: 0.1px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow: hidden;
+}
+
+/* 메모지별 위치 + 기울기 */
+/* 모바일 메모지별 실제 위치 + 기울기 + 왼쪽 상단 시작 */
+
+/* 1번 - 왼쪽 위 편지지 */
+.m-note1 {
+  left: 10.2%;
+  top: 8%;
+  width: 36%;
+  height: 13.5%;
+  transform: rotate(-6deg);
+}
+
+.m-note1 .mobile-memory-body {
+  padding: 8% 9% 6% 10%;
+  line-height: 3.05vw;
+}
+
+/* 2번 - 오른쪽 위 노란 줄노트 */
+.m-note2 {
+  left: 55%;
+  top: 7%;
+  width: 34%;
+  height: 14.5%;
+  transform: rotate(7deg);
+}
+
+.m-note2 .mobile-memory-body {
+  padding: 8% 9% 6% 10%;
+  line-height: 3.05vw;
+}
+
+/* 3번 - 왼쪽 가운데 분홍 메모 */
+.m-note3 {
+  left: 6.5%;
+  top: 39%;
+  width: 35.5%;
+  height: 15.5%;
+  transform: rotate(1.5deg);
+}
+
+.m-note3 .mobile-memory-body {
+  padding: 8% 8% 6% 9%;
+  line-height: 3.05vw;
+}
+
+/* 4번 - 오른쪽 가운데 베이지 메모 */
+.m-note4 {
+  left: 49.5%;
+  top: 27%;
+  width: 31.5%;
+  height: 16.5%;
+  transform: rotate(1.5deg);
+}
+
+.m-note4 .mobile-memory-body {
+  padding: 8% 8% 6% 9%;
+  line-height: 3.05vw;
+}
+
+/* 5번 - 가운데 아래 격자 메모 */
+.m-note5 {
+  left: 48.5%;
+  top: 45.5%;
+  width: 35.5%;
+  height: 14%;
+  transform: rotate(2.2deg);
+}
+
+.m-note5 .mobile-memory-body {
+  padding: 8% 8% 6% 9%;
+  line-height: 3.05vw;
+}
+
+/* 6번 - 왼쪽 아래 노란 메모 */
+.m-note6 {
+  left: 3.5%;
+  top: 58.5%;
+  width: 35%;
+  height: 12.8%;
+  transform: rotate(5deg);
+}
+
+.m-note6 .mobile-memory-body {
+  padding: 8% 8% 6% 9%;
+  line-height: 3.05vw;
+}
+
+
+/* 7번 */
+.m-note7 {
+    left: 51.5%;
+    top: 63.5%;
+    width: 35%;
+    height: 11%;
+    transform: rotate(0deg);
+}
+
+.m-note7 .mobile-memory-body {
+    padding: 6% 8% 5% 8%;
+    line-height: 3.1vw;
+}
+
+/* 8번 */
+.m-note8 {
+    left: 43.5%;
+    top: 81.5%;
+    width: 40.5%;
+    height: 13.5%;
+    transform: rotate(0deg);
+}
+
+.m-note8 .mobile-memory-body {
+    padding: 6% 8% 5% 8%;
+    line-height: 3.1vw;
+    color: #4a3121;
+}

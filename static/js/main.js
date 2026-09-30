@@ -12,22 +12,54 @@ const mainScreen = document.getElementById('mainScreen');
 const loginView = document.getElementById('loginView');
 const memoryView = document.getElementById('memoryView');
 const memoryVideo = document.getElementById('memoryVideo');
+const mobileMemoryView = document.getElementById('mobileMemoryView');
+const mobileMemoryVideo = document.getElementById('mobileMemoryVideo');
 const nameInput = document.getElementById('nameInput');
 const searchButton = document.getElementById('searchButton');
 const searchMessage = document.getElementById('searchMessage');
+const mobileNameInput = document.getElementById('mobileNameInput');
+const mobileSearchButton = document.getElementById('mobileSearchButton');
 
 
 /** 해시 주소와 hidden 속성을 함께 바꿔 메인·로그인·추억 화면을 전환합니다. */
 function showScreen(screenName, pushHistory = true) {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
     mainScreen.hidden = screenName !== 'main';
     loginView.hidden = screenName !== 'login';
-    memoryView.hidden = screenName !== 'memory';
 
-    if (screenName === 'memory') {
+    if (screenName === 'memory' && isMobile) {
+    // 모바일 메모리 화면
+    memoryView.hidden = true;
+
+    mobileMemoryView.classList.add('active');
+    mobileMemoryView.setAttribute('aria-hidden', 'false');
+
+    renderMemoryPage();
+
+    memoryVideo.pause();
+    mobileMemoryVideo.currentTime = 0;
+    mobileMemoryVideo.play().catch(() => {});
+    } else if (screenName === 'memory') {
+        // PC 메모리 화면
+        memoryView.hidden = false;
+
+        mobileMemoryView.classList.remove('active');
+        mobileMemoryView.setAttribute('aria-hidden', 'true');
+
+        mobileMemoryVideo.pause();
+
         renderMemoryPage();
         memoryVideo.play().catch(() => {});
     } else {
+        // 메모리 화면이 아닐 때
+        memoryView.hidden = true;
+
+        mobileMemoryView.classList.remove('active');
+        mobileMemoryView.setAttribute('aria-hidden', 'true');
+
         memoryVideo.pause();
+        mobileMemoryVideo.pause();
     }
 
     if (pushHistory) {
@@ -38,25 +70,41 @@ function showScreen(screenName, pushHistory = true) {
 
 
 /** 입력한 이름으로 서버 API를 호출하고 추억 화면을 엽니다. */
-async function loadMemoriesByName() {
-    const targetName = nameInput.value.trim();
+async function loadMemoriesByName(inputElement = nameInput) {
+    const targetName = inputElement.value.trim();
+
     if (!targetName) {
-        searchMessage.textContent = '이름을 입력해 주세요.';
+        if (inputElement === nameInput) {
+            searchMessage.textContent = '이름을 입력해 주세요.';
+        } else {
+            alert('이름을 입력해 주세요.');
+        }
         return;
     }
 
-    nameInput.disabled = true;
-    searchMessage.textContent = '추억을 불러오는 중입니다...';
+    inputElement.disabled = true;
+
+    if (inputElement === nameInput) {
+        searchMessage.textContent = '추억을 불러오는 중입니다...';
+    }
 
     try {
         const data = await memoriesApi.findByName(targetName);
         setMemories(data.memories || [], targetName);
-        searchMessage.textContent = '';
+
+        if (inputElement === nameInput) {
+            searchMessage.textContent = '';
+        }
+
         showScreen('memory');
     } catch (error) {
-        searchMessage.textContent = error.message;
+        if (inputElement === nameInput) {
+            searchMessage.textContent = error.message;
+        } else {
+            alert(error.message);
+        }
     } finally {
-        nameInput.disabled = false;
+        inputElement.disabled = false;
     }
 }
 
@@ -76,7 +124,16 @@ function initializeNavigation() {
         }
     });
     searchButton.addEventListener('click', loadMemoriesByName);
+    mobileNameInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        loadMemoriesByName(mobileNameInput);
+    }
+});
 
+mobileSearchButton.addEventListener('click', () => {
+    loadMemoriesByName(mobileNameInput);
+});
     window.addEventListener('popstate', () => {
         const screen = location.hash === '#login'
             ? 'login'
@@ -177,4 +234,94 @@ easterEggNext.addEventListener("click", () => {
         showEasterEggImage(easterEggIndex + 1);
     }
 });
+// ==============================
+// 모바일 이스터에그
+// ==============================
 
+const mobileEasterEggTrigger =
+    document.getElementById("mobileEasterEggTrigger");
+
+const mobileEasterEggViewer =
+    document.getElementById("mobileEasterEggViewer");
+
+const mobileEasterEggImage =
+    document.getElementById("mobileEasterEggImage");
+
+const mobileEasterEggNext =
+    document.getElementById("mobileEasterEggNext");
+
+const mobileEasterEggImages = [
+    "/static/assets/images/easteregg/1.png",
+    "/static/assets/images/easteregg/2.png",
+    "/static/assets/images/easteregg/3.png",
+    "/static/assets/images/easteregg/4.png",
+    "/static/assets/images/easteregg/5.png",
+    "/static/assets/images/easteregg/6.png",
+    "/static/assets/images/easteregg/7.png",
+    "/static/assets/images/easteregg/8.png",
+    "/static/assets/images/easteregg/9.png"
+];
+
+let mobileEasterEggIndex = 0;
+let mobileEasterEggTimer = null;
+
+function lockMobileEasterEggNext() {
+    clearTimeout(mobileEasterEggTimer);
+
+    mobileEasterEggNext.disabled = true;
+
+    mobileEasterEggTimer = setTimeout(() => {
+        mobileEasterEggNext.disabled = false;
+    }, 4000);
+}
+
+function showMobileEasterEggImage(index) {
+    mobileEasterEggIndex = index;
+
+    mobileEasterEggImage.classList.add("is-changing");
+
+    setTimeout(() => {
+        mobileEasterEggImage.src =
+            mobileEasterEggImages[mobileEasterEggIndex];
+
+        mobileEasterEggImage.onload = () => {
+            mobileEasterEggImage.classList.remove("is-changing");
+        };
+
+        if (mobileEasterEggIndex === mobileEasterEggImages.length - 1) {
+            mobileEasterEggNext.innerHTML =
+                '<span class="go-home-text">처음으로</span><span class="go-home-arrow">→</span>';
+            mobileEasterEggNext.setAttribute("aria-label", "처음 화면으로");
+        } else {
+            mobileEasterEggNext.innerHTML =
+                '<span class="go-home-arrow">→</span>';
+            mobileEasterEggNext.setAttribute("aria-label", "다음");
+        }
+
+        lockMobileEasterEggNext();
+    }, 250);
+}
+
+mobileEasterEggTrigger.addEventListener("click", () => {
+    mobileEasterEggIndex = 0;
+
+    mobileEasterEggViewer.classList.add("active");
+    mobileEasterEggViewer.setAttribute("aria-hidden", "false");
+
+    showMobileEasterEggImage(0);
+});
+
+mobileEasterEggNext.addEventListener("click", () => {
+    if (mobileEasterEggNext.disabled) return;
+
+    if (
+        mobileEasterEggIndex <
+        mobileEasterEggImages.length - 1
+    ) {
+        showMobileEasterEggImage(
+            mobileEasterEggIndex + 1
+        );
+    } else {
+        history.back();
+    }
+});

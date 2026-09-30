@@ -196,6 +196,7 @@ body {
     z-index: 2;
     pointer-events: none;
 }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

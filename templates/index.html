@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>한장의 추억</title>
     <link rel="stylesheet" href="/static/css/fonts.css?v=20260913-2">
-    <link rel="stylesheet" href="/static/css/style.css?v=20260913-3">
+   <link rel="stylesheet" href="/static/css/style.css?v=20260929-1">
 </head>
 <body>
     <main class="viewport" id="app">
@@ -20,12 +20,12 @@
                 src="/static/assets/images/main.png?v=20260913-2"
                 alt=""
                 aria-hidden="true">
-            <img
-                class="screen-media"
-                src="/static/assets/images/main.png?v=20260913-2"
-                decoding="sync"
-                fetchpriority="high"
-                alt="한장의 추억 메인 화면">
+ <img
+    class="screen-media"
+    src="/static/assets/images/main.png?v=20260913-2"
+    decoding="sync"
+    fetchpriority="high"
+    alt="한장의 추억 메인 화면">
 <button
     id="easterEggTrigger"
     class="easteregg-trigger"
@@ -57,7 +57,48 @@
                 type="button"
                 aria-label="로그인 화면 열기"></button>
         </section>
+        <!-- 모바일 전용 메인 화면 -->
+        <section
+            class="mobile-main-screen"
+            id="mobileMainScreen"
+            aria-label="모바일 메인 화면">
 
+            <img
+                class="mobile-main-image"
+                src="/static/assets/images/mobile-main.png?v=20260927-1"
+                alt="한장의 추억 모바일 메인 화면">
+
+            <!-- 모바일 이스터에그 클릭 영역 -->
+            <button
+                id="mobileEasterEggTrigger"
+                class="mobile-easteregg-trigger"
+                type="button"
+                aria-label="이스터에그 이야기 열기">
+            </button>
+
+            <!-- 모바일 이름 검색 -->
+            <input
+                class="mobile-name-input"
+                id="mobileNameInput"
+                type="text"
+                placeholder="이름을 입력하세요"
+                autocomplete="off"
+                maxlength="100">
+
+            <button
+                class="mobile-search-button"
+                id="mobileSearchButton"
+                type="button"
+                aria-label="입력한 이름으로 추억 검색">
+            </button>
+
+            <!-- 아래 30% 랜덤 문구 -->
+            <div class="mobile-quote">
+                <p id="mobileQuoteContext" class="mobile-quote-context"></p>
+                <p id="mobileQuoteText" class="mobile-quote-text"></p>
+                <p id="mobileQuoteAuthor" class="mobile-quote-author"></p>
+            </div>
+        </section>
         <section
             class="stage login-view"
             id="loginView"
@@ -165,7 +206,82 @@
                 <button id="nextPage" type="button" aria-label="다음 페이지">›</button>
             </nav>
         </section>
-    </main>
+        <!-- 모바일 전용 메모리 화면 -->
+<div
+    id="mobileMemoryView"
+    class="mobile-memory-view"
+    aria-hidden="true"
+>
+    <video
+        id="mobileMemoryVideo"
+        class="mobile-memory-video"
+        autoplay
+        muted
+        loop
+        playsinline
+    >
+        <source
+            src="/static/assets/videos/memory-m.mp4"
+            type="video/mp4"
+        >
+    </video>
+    </video>
+
+<!-- 여기 넣기 -->
+<div class="mobile-memory-notes" id="mobileMemoryNotes">
+    <article class="mobile-memory-note m-note1">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note2">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note3">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note4">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note5">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note6">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note7">
+        <div class="mobile-memory-body"></div>
+    </article>
+
+    <article class="mobile-memory-note m-note8">
+        <div class="mobile-memory-body"></div>
+    </article>
+</div>
+<!-- 여기까지 -->
+
+</div>
+</main>
+
+<div id="mobileEasterEggViewer" class="mobile-easteregg-viewer" aria-hidden="true">
+    <img
+        id="mobileEasterEggImage"
+        class="mobile-easteregg-image"
+        src=""
+        alt="모바일 이스터에그 이야기">
+
+    <button
+        id="mobileEasterEggNext"
+        class="mobile-easteregg-next"
+        type="button"
+        disabled
+        aria-label="다음">
+        →
+    </button>
+</div>
 <div id="easterEggViewer" class="easteregg-viewer" aria-hidden="true">
     <img
         id="easterEggImage"
@@ -182,6 +298,7 @@
         →
     </button>
 </div>
-    <script type="module" src="/static/js/main.js?v=20260913-3"></script>
+    <script src="/static/js/mobile-quotes.js?v=20260927-1"></script>
+    <script type="module" src="/static/js/main.js?v=20260929-1"></script>
 </body>
 </html>
