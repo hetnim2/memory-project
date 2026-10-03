@@ -42,21 +42,35 @@ if (isMobileWrite) {
     }
 
     // 모바일 영상 준비 전 재생 아이콘이 보이지 않도록 처리
-    if (mobileVideo) {
-        mobileVideo.style.opacity = '0';
+if (mobileVideo) {
+    // 자동재생에 성공하기 전까지 영상은 숨김
+    mobileVideo.style.opacity = '0';
 
-        const showMobileVideo = () => {
+    // 영상이 이름/내용 입력 터치를 절대 가로채지 않게 함
+    mobileVideo.style.pointerEvents = 'none';
+
+    const tryPlayMobileVideo = async () => {
+        try {
+            await mobileVideo.play();
+
+            // 실제 재생 성공했을 때만 영상 표시
             mobileVideo.style.opacity = '1';
-        };
-
-        if (mobileVideo.readyState >= 2) {
-            showMobileVideo();
-        } else {
-            mobileVideo.addEventListener('loadeddata', showMobileVideo, { once: true });
+        } catch (error) {
+            // 아이폰 등이 자동재생을 막으면 영상은 계속 숨김
+            mobileVideo.style.opacity = '0';
         }
+    };
 
-        mobileVideo.play().catch(() => {});
+    if (mobileVideo.readyState >= 2) {
+        tryPlayMobileVideo();
+    } else {
+        mobileVideo.addEventListener(
+            'loadeddata',
+            tryPlayMobileVideo,
+            { once: true }
+        );
     }
+}
 }
 /** 추억 입력 글자 수를 화면에 바로 표시합니다. */
 memoryContentInput.addEventListener('input', () => {
