@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>한장의 추억</title>
     <link rel="stylesheet" href="/static/css/fonts.css?v=20260913-2">
-   <link rel="stylesheet" href="/static/css/style.css?v=20260929-1">
+    <link rel="stylesheet" href="/static/css/style.css?v=20261003-1">
 </head>
 <body>
     <main class="viewport" id="app">
@@ -65,7 +65,7 @@
 
             <img
                 class="mobile-main-image"
-                src="/static/assets/images/mobile-main.png?v=20260927-1"
+                src="/static/assets/images/mobile-main.webp?v=20261001-1"
                 alt="한장의 추억 모바일 메인 화면">
 
             <!-- 모바일 이스터에그 클릭 영역 -->
@@ -215,16 +215,16 @@
     <video
         id="mobileMemoryVideo"
         class="mobile-memory-video"
-        autoplay
+        
         muted
         loop
         playsinline
-    >
+       preload="auto"
+       >
         <source
-            src="/static/assets/videos/memory-m.mp4"
+            src="/static/assets/videos/memory-m.mp4?v=20261003-2"
             type="video/mp4"
         >
-    </video>
     </video>
 
 <!-- 여기 넣기 -->
@@ -299,6 +299,6 @@
     </button>
 </div>
     <script src="/static/js/mobile-quotes.js?v=20260927-1"></script>
-    <script type="module" src="/static/js/main.js?v=20260929-1"></script>
+    <script type="module" src="/static/js/main.js?v=20261003-1"></script>
 </body>
 </html>

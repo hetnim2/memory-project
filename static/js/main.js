@@ -181,24 +181,35 @@ const easterEggImages = [
 let easterEggIndex = 0;
 let easterEggTimer = null;
 
+
 function lockEasterEggNext() {
     clearTimeout(easterEggTimer);
 
     easterEggNext.disabled = true;
-    easterEggNext.classList.remove("is-ready");
+    easterEggNext.classList.remove("is-ready", "is-last");
 
-    // 10번째 사진에서는 다음 버튼 없음
+    // 마지막 사진: "처음으로 →" 즉시 표시
     if (easterEggIndex === easterEggImages.length - 1) {
+        easterEggNext.innerHTML =
+            '<span class="go-home-text">처음으로</span><span class="go-home-arrow">→</span>';
+
+        easterEggNext.setAttribute("aria-label", "처음 화면으로");
+        easterEggNext.classList.add("is-last", "is-ready");
+        easterEggNext.disabled = false;
         return;
     }
 
-    // 4초 후 화살표 활성화
+    // 나머지 사진: 화살표는 4초 후 표시
+    easterEggNext.innerHTML =
+        '<span class="go-home-arrow">→</span>';
+
+    easterEggNext.setAttribute("aria-label", "다음");
+
     easterEggTimer = setTimeout(() => {
         easterEggNext.disabled = false;
         easterEggNext.classList.add("is-ready");
     }, 4000);
 }
-
 function showEasterEggImage(index) {
     easterEggIndex = index;
 
@@ -232,7 +243,9 @@ easterEggNext.addEventListener("click", () => {
 
     if (easterEggIndex < easterEggImages.length - 1) {
         showEasterEggImage(easterEggIndex + 1);
-    }
+   } else {
+    window.location.href = '/';
+}
 });
 // ==============================
 // 모바일 이스터에그

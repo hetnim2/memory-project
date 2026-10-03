@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>익명으로 추억 남기기 | 한장의 추억</title>
     <link rel="stylesheet" href="/static/css/fonts.css?v=20260913-3">
-    <link rel="stylesheet" href="/static/css/write.css?v=20260913-3">
+    <link rel="stylesheet" href="/static/css/write.css?v=20261003-3">
 </head>
 <body>
     <main class="write-page">
@@ -15,15 +15,27 @@
                 src="/static/assets/images/write-poster.jpg"
                 alt=""
                 aria-hidden="true">
-            <video
-                class="write-bg-video"
-                src="/static/assets/videos/write.mp4"
-                poster="/static/assets/images/write-poster.jpg"
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"></video>
+  <video
+    class="write-bg-video pc-only"
+    data-src="/static/assets/videos/write.mp4"
+    poster="/static/assets/images/write-poster.jpg"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata">
+</video>
+
+<video
+    class="write-bg-video mobile-only"
+    data-src="/static/assets/videos/write-m.mp4"
+    poster="/static/assets/images/write-m-poster.jpg"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata">
+</video>
 
             <section class="memory-card" aria-labelledby="pageTitle">
                 <h1 id="pageTitle" class="sr-only">익명으로 추억 남기기</h1>
@@ -41,11 +53,11 @@
                     <textarea
                         id="memoryContent"
                         name="memory_content"
-                        maxlength="100"
+                        
                         required></textarea>
 
                     <p class="character-count">
-                        <span id="characterCount">0</span> / 100
+                       <span id="characterCount">0</span> / <span id="characterMax">100</span>
                     </p>
                     <button id="submitButton" type="submit">추억 남기기</button>
                     <p
@@ -64,6 +76,6 @@
         </div>
     </main>
 
-    <script type="module" src="/static/js/write.js?v=20260913-3"></script>
+    <script type="module" src="/static/js/write.js?v=20261003-1"></script>
 </body>
 </html>

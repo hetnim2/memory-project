@@ -10,14 +10,61 @@ const submitButton = document.getElementById('submitButton');
 const formMessage = document.getElementById('formMessage');
 const findMemoryButton = document.getElementById('findMemoryButton');
 
+// 모바일 write 화면 전용
+const isMobileWrite = window.matchMedia('(max-width: 767px)').matches;
+const pcVideo = document.querySelector('.pc-only');
+const mobileVideoElement = document.querySelector('.mobile-only');
+const memoryMaxLength = isMobileWrite ? 80 : 100;
+memoryContentInput.maxLength = memoryMaxLength;
+document.getElementById('characterMax').textContent = memoryMaxLength;
+if (isMobileWrite) {
+    if (mobileVideoElement) {
+        mobileVideoElement.src = mobileVideoElement.dataset.src;
+        mobileVideoElement.load();
+    }
+} else {
+    if (pcVideo) {
+        pcVideo.src = pcVideo.dataset.src;
+        pcVideo.load();
+    }
+}
+if (isMobileWrite) {
+    const writeStage = document.querySelector('.write-stage');
+    const mobileVideo = document.querySelector('.mobile-only');
 
+    // 키보드 떠도 처음 화면 높이를 유지
+    const initialHeight = window.innerHeight;
+
+    if (writeStage) {
+        writeStage.style.height = `${initialHeight}px`;
+        writeStage.style.minHeight = `${initialHeight}px`;
+        writeStage.style.maxHeight = `${initialHeight}px`;
+    }
+
+    // 모바일 영상 준비 전 재생 아이콘이 보이지 않도록 처리
+    if (mobileVideo) {
+        mobileVideo.style.opacity = '0';
+
+        const showMobileVideo = () => {
+            mobileVideo.style.opacity = '1';
+        };
+
+        if (mobileVideo.readyState >= 2) {
+            showMobileVideo();
+        } else {
+            mobileVideo.addEventListener('loadeddata', showMobileVideo, { once: true });
+        }
+
+        mobileVideo.play().catch(() => {});
+    }
+}
 /** 추억 입력 글자 수를 화면에 바로 표시합니다. */
 memoryContentInput.addEventListener('input', () => {
     characterCount.textContent = memoryContentInput.value.length;
 });
 
 
-/** 작성 내용을 FastAPI에 저장하고 성공하면 검색 화면으로 이동합니다. */
+/* 작성 내용을 FastAPI에 저장합니다. */
 memoryForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -37,7 +84,15 @@ memoryForm.addEventListener('submit', async (event) => {
 
     try {
         await memoriesApi.create(payload);
-        window.location.href = '/search';
+        formMessage.className = 'form-message';
+formMessage.textContent = '저장완료';
+
+setTimeout(() => {
+    if (formMessage.textContent === '저장완료') {
+        formMessage.textContent = '';
+    }
+}, 4000);
+        
     } catch (error) {
         formMessage.className = 'form-message error';
         formMessage.textContent = error.message;

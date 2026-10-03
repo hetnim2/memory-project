@@ -566,6 +566,44 @@ button {
     pointer-events: auto;
     cursor: pointer;
 }
+/* PC 이스터에그 마지막 - 처음으로 */
+#easterEggNext.is-last {
+    right: 4%;
+    bottom: 5%;
+
+    width: auto;
+    min-width: 125px;
+    height: auto;
+    padding: 0;
+
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+#easterEggNext.is-last .go-home-text {
+    font-family: 'Gaegu', cursive;
+    font-size: 36px;
+    font-weight: 950;
+    color: #dfdce2;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(10, 10, 35, 0.75);
+}
+
+#easterEggNext.is-last .go-home-arrow {
+    font-family: 'Gaegu', cursive;
+    font-size: 32x;
+    font-weight: 950;
+    color: #ded9e4;
+    text-shadow: 0 1px 3px rgba(10, 10, 35, 0.75);
+}
 /* 모바일 전용 메인 화면 */
 .mobile-main-screen {
     display: none;
@@ -617,7 +655,7 @@ button {
     display: block;
     position: absolute;
 
-    left: 15%;
+    left: 72%;
     top: 24%;
     width: 10%;
     height: 6%;
