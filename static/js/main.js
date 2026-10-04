@@ -164,7 +164,26 @@ const easterEggTrigger = document.getElementById("easterEggTrigger");
 const easterEggViewer = document.getElementById("easterEggViewer");
 const easterEggImage = document.getElementById("easterEggImage");
 const easterEggNext = document.getElementById("easterEggNext");
+const easterEggMusic = document.getElementById("easterEggMusic");
 
+function startEasterEggMusic() {
+    if (!easterEggMusic) return;
+
+    easterEggMusic.pause();
+    easterEggMusic.currentTime = 0;
+    easterEggMusic.volume = 0.7;
+
+    easterEggMusic.play().catch(() => {
+        console.log("이스터에그 음악 재생이 차단되었습니다.");
+    });
+}
+
+function stopEasterEggMusic() {
+    if (!easterEggMusic) return;
+
+    easterEggMusic.pause();
+    easterEggMusic.currentTime = 0;
+}
 const easterEggImages = [
     "/static/assets/images/easteregg/1.png",
     "/static/assets/images/easteregg/2.png",
@@ -230,7 +249,7 @@ function showEasterEggImage(index) {
 // 메인화면 왼쪽 아래 액자 클릭
 easterEggTrigger.addEventListener("click", () => {
     easterEggIndex = 0;
-
+startEasterEggMusic();
     easterEggViewer.classList.add("is-open");
     easterEggViewer.setAttribute("aria-hidden", "false");
 
@@ -243,7 +262,8 @@ easterEggNext.addEventListener("click", () => {
 
     if (easterEggIndex < easterEggImages.length - 1) {
         showEasterEggImage(easterEggIndex + 1);
-   } else {
+  } else {
+    stopEasterEggMusic();
     window.location.href = '/';
 }
 });
@@ -317,7 +337,7 @@ function showMobileEasterEggImage(index) {
 
 mobileEasterEggTrigger.addEventListener("click", () => {
     mobileEasterEggIndex = 0;
-
+    startEasterEggMusic();
     mobileEasterEggViewer.classList.add("active");
     mobileEasterEggViewer.setAttribute("aria-hidden", "false");
 
@@ -335,6 +355,7 @@ mobileEasterEggNext.addEventListener("click", () => {
             mobileEasterEggIndex + 1
         );
     } else {
+        stopEasterEggMusic();
         history.back();
     }
 });
