@@ -31,7 +31,7 @@ if (isMobileWrite) {
 if (isMobileWrite) {
     const writeStage = document.querySelector('.write-stage');
     const mobileVideo = document.querySelector('.mobile-only');
-
+    const memoryCard = document.querySelector('.memory-card');
     // 키보드 떠도 처음 화면 높이를 유지
     const initialHeight = window.innerHeight;
 
@@ -40,7 +40,33 @@ if (isMobileWrite) {
         writeStage.style.minHeight = `${initialHeight}px`;
         writeStage.style.maxHeight = `${initialHeight}px`;
     }
+if (writeStage && mobileVideo && memoryCard) {
+    const stageWidth = writeStage.clientWidth;
+    const stageHeight = initialHeight;
 
+    const videoRatio = 940 / 1672;
+    const stageRatio = stageWidth / stageHeight;
+
+    let videoWidth;
+    let videoHeight;
+
+    if (stageRatio > videoRatio) {
+        videoHeight = stageHeight;
+        videoWidth = videoHeight * videoRatio;
+    } else {
+        videoWidth = stageWidth;
+        videoHeight = videoWidth / videoRatio;
+    }
+
+    const offsetX = (stageWidth - videoWidth) * 0.5;
+    const offsetY = (stageHeight - videoHeight) * 0.45;
+
+    memoryCard.style.inset = 'auto';
+    memoryCard.style.left = `${offsetX}px`;
+    memoryCard.style.top = `${offsetY}px`;
+    memoryCard.style.width = `${videoWidth}px`;
+    memoryCard.style.height = `${videoHeight}px`;
+}
     // 모바일 영상 준비 전 재생 아이콘이 보이지 않도록 처리
 if (mobileVideo) {
     // 자동재생에 성공하기 전까지 영상은 숨김

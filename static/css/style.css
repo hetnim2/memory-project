@@ -843,7 +843,7 @@ button {
     width: max(100vw, calc(100vh * 9 / 16));
     height: max(100vh, calc(100vw * 16 / 9));
 
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -47%);
     pointer-events: none;
 }
 
@@ -900,8 +900,8 @@ button {
 
 /* 3번 - 왼쪽 가운데 분홍 메모 */
 .m-note3 {
-  left: 6.5%;
-  top: 39%;
+  left: 6%;
+  top: 37%;
   width: 35.5%;
   height: 15.5%;
   transform: rotate(1.5deg);
@@ -914,8 +914,8 @@ button {
 
 /* 4번 - 오른쪽 가운데 베이지 메모 */
 .m-note4 {
-  left: 49.5%;
-  top: 27%;
+  left: 50%;
+  top: 25.5%;
   width: 31.5%;
   height: 16.5%;
   transform: rotate(1.5deg);
@@ -929,7 +929,7 @@ button {
 /* 5번 - 가운데 아래 격자 메모 */
 .m-note5 {
   left: 48.5%;
-  top: 45.5%;
+  top: 43.2%;
   width: 35.5%;
   height: 14%;
   transform: rotate(2.2deg);
@@ -943,7 +943,7 @@ button {
 /* 6번 - 왼쪽 아래 노란 메모 */
 .m-note6 {
   left: 3.5%;
-  top: 58.5%;
+  top: 55.5%;
   width: 35%;
   height: 12.8%;
   transform: rotate(5deg);
@@ -958,7 +958,7 @@ button {
 /* 7번 */
 .m-note7 {
     left: 51.5%;
-    top: 63.5%;
+    top: 59%;
     width: 35%;
     height: 11%;
     transform: rotate(0deg);
@@ -972,7 +972,7 @@ button {
 /* 8번 */
 .m-note8 {
     left: 43.5%;
-    top: 81.5%;
+    top: 76.5%;
     width: 40.5%;
     height: 13.5%;
     transform: rotate(0deg);
