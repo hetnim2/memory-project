@@ -50,17 +50,22 @@ if (writeStage && mobileVideo && memoryCard) {
     let videoWidth;
     let videoHeight;
 
-    if (stageRatio > videoRatio) {
-        videoHeight = stageHeight;
-        videoWidth = videoHeight * videoRatio;
-    } else {
-        videoWidth = stageWidth;
-        videoHeight = videoWidth / videoRatio;
-    }
+   if (stageRatio > videoRatio) {
+    videoWidth = stageWidth;
+    videoHeight = videoWidth / videoRatio;
+} else {
+    videoHeight = stageHeight;
+    videoWidth = videoHeight * videoRatio;
+}
 
     const offsetX = (stageWidth - videoWidth) * 0.5;
     const offsetY = (stageHeight - videoHeight) * 0.45;
-
+mobileVideo.style.inset = 'auto';
+mobileVideo.style.left = `${offsetX}px`;
+mobileVideo.style.top = `${offsetY}px`;
+mobileVideo.style.width = `${videoWidth}px`;
+mobileVideo.style.height = `${videoHeight}px`;
+mobileVideo.style.objectFit = 'cover';
     memoryCard.style.inset = 'auto';
     memoryCard.style.left = `${offsetX}px`;
     memoryCard.style.top = `${offsetY}px`;
