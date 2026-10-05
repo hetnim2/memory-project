@@ -19,12 +19,38 @@ const searchButton = document.getElementById('searchButton');
 const searchMessage = document.getElementById('searchMessage');
 const mobileNameInput = document.getElementById('mobileNameInput');
 const mobileSearchButton = document.getElementById('mobileSearchButton');
+const memoryBgm = new Audio('/static/audio/Moonlight.mp3');
+memoryBgm.volume = 0.25;
+memoryBgm.loop = true;
+mobileSearchButton.addEventListener('pointerdown', () => {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (!isMobile) return;
+
+    memoryBgm.currentTime = 0;
+    memoryBgm.volume = 0;
+
+    memoryBgm.play().catch((err) => {
+        console.log('BGM 활성화 실패:', err);
+    });
+});
 
 
 /** 해시 주소와 hidden 속성을 함께 바꿔 메인·로그인·추억 화면을 전환합니다. */
 function showScreen(screenName, pushHistory = true) {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
+if (screenName === 'memory' ) {
+    memoryBgm.currentTime = 0;
+    memoryBgm.volume = 0.25;
 
+    if (memoryBgm.paused) {
+        memoryBgm.play().catch((err) => {
+            console.log('BGM 재생 실패:', err);
+        });
+    }
+} else {
+    memoryBgm.pause();
+    memoryBgm.currentTime = 0;
+}
     mainScreen.hidden = screenName !== 'main';
     loginView.hidden = screenName !== 'login';
 
@@ -118,12 +144,28 @@ function initializeNavigation() {
         showScreen('main');
     });
     nameInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            loadMemoriesByName();
-        }
+    if (event.key === 'Enter') {
+        event.preventDefault();
+
+        memoryBgm.currentTime = 0;
+        memoryBgm.volume = 0.25;
+        memoryBgm.play().catch((err) => {
+            console.log('PC BGM 재생 실패:', err);
+        });
+
+        loadMemoriesByName();
+    }
+});
+
+searchButton.addEventListener('click', () => {
+    memoryBgm.currentTime = 0;
+    memoryBgm.volume = 0.25;
+    memoryBgm.play().catch((err) => {
+        console.log('PC BGM 재생 실패:', err);
     });
-    searchButton.addEventListener('click', loadMemoriesByName);
+
+    loadMemoriesByName();
+});
     mobileNameInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault();
