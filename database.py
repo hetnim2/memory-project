@@ -41,6 +41,7 @@ def _connection_config() -> dict:
         "use_unicode": True,
         "connection_timeout": settings.mysql_connect_timeout,
         "autocommit": False,
+        "use_pure": True,
     }
 
     if settings.mysql_ssl_ca:

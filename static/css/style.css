@@ -504,7 +504,7 @@ button {
     height: 100%;
 
     object-fit: contain;
-    object-position: center;
+    object-position: contain;
 
     border: 0;
     filter: none;
