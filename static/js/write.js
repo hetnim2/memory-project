@@ -131,7 +131,9 @@ memoryForm.addEventListener('submit', async (event) => {
         await memoriesApi.create(payload);
         formMessage.className = 'form-message';
 formMessage.textContent = '저장완료';
-
+targetNameInput.value = '';
+memoryContentInput.value = '';
+characterCount.textContent = '0';
 setTimeout(() => {
     if (formMessage.textContent === '저장완료') {
         formMessage.textContent = '';

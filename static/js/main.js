@@ -20,7 +20,7 @@ const searchMessage = document.getElementById('searchMessage');
 const mobileNameInput = document.getElementById('mobileNameInput');
 const mobileSearchButton = document.getElementById('mobileSearchButton');
 const memoryBgm = new Audio('/static/audio/Moonlight.mp3');
-memoryBgm.volume = 0.25;
+memoryBgm.volume = 0.5;
 memoryBgm.loop = true;
 mobileSearchButton.addEventListener('pointerdown', () => {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -40,7 +40,7 @@ function showScreen(screenName, pushHistory = true) {
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 if (screenName === 'memory' ) {
     memoryBgm.currentTime = 0;
-    memoryBgm.volume = 0.25;
+    memoryBgm.volume = 0.5;
 
     if (memoryBgm.paused) {
         memoryBgm.play().catch((err) => {
@@ -249,16 +249,19 @@ function lockEasterEggNext() {
     easterEggNext.disabled = true;
     easterEggNext.classList.remove("is-ready", "is-last");
 
-    // 마지막 사진: "처음으로 →" 즉시 표시
-    if (easterEggIndex === easterEggImages.length - 1) {
-        easterEggNext.innerHTML =
-            '<span class="go-home-text">처음으로</span><span class="go-home-arrow">→</span>';
+   if (easterEggIndex === easterEggImages.length - 1) {
+    easterEggNext.innerHTML =
+        `<span class="go-home-text">처음으로</span><span class="go-home-arrow">↗</span>`;
+    easterEggNext.setAttribute("aria-label", "처음 화면으로");
 
-        easterEggNext.setAttribute("aria-label", "처음 화면으로");
+    easterEggTimer = setTimeout(() => {
         easterEggNext.classList.add("is-last", "is-ready");
         easterEggNext.disabled = false;
-        return;
-    }
+    }, 4500);
+
+    return;
+}
+    
 
     // 나머지 사진: 화살표는 4초 후 표시
     easterEggNext.innerHTML =
